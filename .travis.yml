@@ -3,18 +3,18 @@ services:
   - docker
 
 before_install:
-  - docker build -t lexworks/docker-react -f Dockerfile.dev .
+  - docker build -t frontend -f Dockerfile.dev .
 
 script:
-  - docker run lexworks/docker-react npm run test -- --coverage
+  - docker run frontend npm run test -- --coverage
 
 deploy:
   provider: elasticbeanstalk
-  region: "us-west-2"
+  region: "ap-southeast-1"
   app: "docker"
-  env: "Docker-env"
-  bucket_name: "elasticbeanstalk-us-west-2-306476627547"
-  bucket_path: "docker"
+  env: "frontend-env"
+  bucket_name: "elasticbeanstalk-ap-southeast-1-091824123864"
+  bucket_path: "frontend"
   on:
     branch: master
   access_key_id: $AWS_ACCESS_KEY
